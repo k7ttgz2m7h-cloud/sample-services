@@ -1,0 +1,14 @@
+com/stepflow/sample/inventory/controller/ApiErrorHandler.class
+com/stepflow/sample/inventory/controller/ApiErrorHandler$ApiError.class
+com/stepflow/sample/inventory/dto/InventoryDtos$Item.class
+com/stepflow/sample/inventory/dto/InventoryDtos$ReservationRequest.class
+com/stepflow/sample/inventory/entity/InventoryReservation.class
+com/stepflow/sample/inventory/entity/Inventory.class
+com/stepflow/sample/inventory/repository/InventoryRepository.class
+com/stepflow/sample/inventory/dto/InventoryDtos$ReleaseResponse.class
+com/stepflow/sample/inventory/repository/InventoryReservationRepository.class
+com/stepflow/sample/inventory/service/InventoryService.class
+com/stepflow/sample/inventory/controller/InventoryController.class
+com/stepflow/sample/inventory/dto/InventoryDtos$ReservationResponse.class
+com/stepflow/sample/inventory/InventoryServiceApplication.class
+com/stepflow/sample/inventory/dto/InventoryDtos.class
