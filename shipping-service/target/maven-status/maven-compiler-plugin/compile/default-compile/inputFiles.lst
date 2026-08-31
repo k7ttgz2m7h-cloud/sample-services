@@ -1,0 +1,7 @@
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/ShippingServiceApplication.java
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/controller/ApiErrorHandler.java
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/controller/ShippingController.java
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/dto/ShippingDtos.java
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/entity/Shipment.java
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/repository/ShipmentRepository.java
+/Users/jrath/My Stuff/stepflow/sample-services/shipping-service/src/main/java/com/stepflow/sample/shipping/service/ShippingService.java
