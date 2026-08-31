@@ -1,9 +1,0 @@
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/InventoryServiceApplication.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/controller/ApiErrorHandler.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/controller/InventoryController.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/dto/InventoryDtos.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/entity/Inventory.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/entity/InventoryReservation.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/repository/InventoryRepository.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/repository/InventoryReservationRepository.java
-/Users/jrath/My Stuff/stepflow/sample-services/inventory-service/src/main/java/com/stepflow/sample/inventory/service/InventoryService.java
