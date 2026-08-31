@@ -1,12 +1,17 @@
 # Stepflow Sample Services
 
-Tiny Spring Boot provider services for testing `end-to-end-order-flow.yaml`.
+Spring Boot provider services for testing the framework's `end-to-end-order-process.yaml` workflow.
 
 These are demo services only. They use Spring Web, Spring Data JPA, H2, and actuator health endpoints. There is no Kafka, Docker, Redis, security, or external database.
 
+## Requirements
+
+- Java 17 or later
+- Maven 3.6 or later
+
 ## Ports
 
-Ports match `business-service-registry/src/main/resources/services-registry.yml`.
+Ports match `business-process-service-registry/src/main/resources/services-registry.yml` in the framework repository.
 
 | Service | Port |
 | --- | ---: |
@@ -22,38 +27,37 @@ Ports match `business-service-registry/src/main/resources/services-registry.yml`
 
 ## Run
 
-From this directory:
+From this directory, run services individually as needed:
 
 ```bash
-./start-all.sh
+mvn -pl order-service spring-boot:run
+mvn -pl payment-service spring-boot:run
+mvn -pl customer-service spring-boot:run
+mvn -pl inventory-service spring-boot:run
+mvn -pl pricing-service spring-boot:run
+mvn -pl fraud-service spring-boot:run
+mvn -pl fulfillment-service spring-boot:run
+mvn -pl shipping-service spring-boot:run
+mvn -pl notification-service spring-boot:run
 ```
 
-Stop all:
+Build and test all services:
 
 ```bash
-./stop-all.sh
+mvn clean test
 ```
 
-Or run one service at a time:
+## Order Creation
 
-```bash
-../mvnw -pl order-service spring-boot:run
-../mvnw -pl payment-service spring-boot:run
-../mvnw -pl customer-service spring-boot:run
-../mvnw -pl inventory-service spring-boot:run
-../mvnw -pl pricing-service spring-boot:run
-../mvnw -pl fraud-service spring-boot:run
-../mvnw -pl fulfillment-service spring-boot:run
-../mvnw -pl shipping-service spring-boot:run
-../mvnw -pl notification-service spring-boot:run
+The workflow creates an order with `clientRequestId` and `customerId`. Do not send an `orderId` in the create request. `order-service` generates it and returns the same order when a request is retried with the same `clientRequestId`.
+
+```json
+{
+  "clientRequestId": "REQ-1001",
+  "customerId": "CUST-1"
+}
 ```
 
-Compile all:
+## Workflow Note
 
-```bash
-../mvnw test
-```
-
-## Note
-
-The services expose the API paths expected by `end-to-end-order-flow.yaml`. The orchestrator still needs request payload mapping and path variable substitution to run the full multi-step workflow end to end.
+The services expose the API paths used by `end-to-end-order-process.yaml`. The current end-to-end order workflow does not execute notification steps; `notification-service` remains available as an independent sample service for future workflows.
