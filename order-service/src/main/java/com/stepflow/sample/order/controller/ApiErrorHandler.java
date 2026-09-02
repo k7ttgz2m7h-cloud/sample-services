@@ -1,5 +1,7 @@
 package com.stepflow.sample.order.controller;
 
+import com.stepflow.sample.order.dto.OrderDtos.DuplicateOrderResponse;
+import com.stepflow.sample.order.service.DuplicateOrderException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,6 +10,16 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class ApiErrorHandler {
+    @ExceptionHandler(DuplicateOrderException.class)
+    public ResponseEntity<DuplicateOrderResponse> handle(DuplicateOrderException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new DuplicateOrderResponse(
+                        "DUPLICATE_ORDER",
+                        exception.getMessage(),
+                        HttpStatus.CONFLICT.value(),
+                        exception.getExistingOrder()));
+    }
+
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ApiError> handle(ResponseStatusException exception) {
         int status = exception.getStatusCode().value();

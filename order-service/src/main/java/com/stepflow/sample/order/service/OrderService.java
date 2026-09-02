@@ -27,7 +27,7 @@ public class OrderService {
         }
         var existingOrder = repository.findByClientRequestId(request.clientRequestId());
         if (existingOrder.isPresent()) {
-            return toResponse(existingOrder.get());
+            throw new DuplicateOrderException(toResponse(existingOrder.get()));
         }
         String orderId = newOrderId();
         OrderRecord order = new OrderRecord();
