@@ -61,3 +61,30 @@ The workflow creates an order with `clientRequestId` and `customerId`. Do not se
 ## Workflow Note
 
 The services expose the API paths used by `end-to-end-order-process.yaml`. The current end-to-end order workflow does not execute notification steps; `notification-service` remains available as an independent sample service for future workflows.
+
+## Centralized logging
+
+Before launching services individually from this directory in Bash, run
+`source ../business-process-framework/stepflow-env.sh`. This resolves the shared
+log folder from the checkout location, even when you later change directories.
+`start-all.sh` sets this automatically. For IDE launches, set `STEPFLOW_LOG_DIR`
+to `<stepflow>/temp/stepflow-logs` in the run configuration.
+
+Each service writes ECS JSON to
+`${STEPFLOW_LOG_DIR:-../temp/stepflow-logs}/<service-name>.json`, with its identity in
+`service.name`. Restart services after configuration changes. Console logging is
+also retained. Files rotate at 10 MB, with seven days / 100 MB of archives per
+service.
+
+Use the shared `logstash.conf` in the sibling `business-process-framework`
+repository to collect all services into Elasticsearch. Its
+`docs/centralized-logging.md` documents setup and search examples. All services
+use Spring Boot 4.1.1 built-in ECS logging, configured entirely in
+`application.yml`; no custom Logback XML or encoder dependency is needed.
+
+The services retain their Java 17 compilation target. Swagger/OpenAPI uses
+springdoc 3.1.1 for Spring Boot 4 compatibility. Database-backed services include
+Boot's `spring-boot-h2console` module to preserve `/h2-console/` support.
+
+After an upgrade, run `mvn clean verify` from this repository before restarting
+services so removed logging resources are not left in `target/classes`.

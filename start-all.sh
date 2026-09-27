@@ -2,6 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export STEPFLOW_LOG_DIR="${STEPFLOW_LOG_DIR:-$(cd "$ROOT_DIR/.." && pwd)/temp/stepflow-logs}"
 LOG_DIR="$ROOT_DIR/logs"
 PID_DIR="$ROOT_DIR/pids"
 

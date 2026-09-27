@@ -1,6 +1,8 @@
 server:
   port: 8088
 spring:
+  application:
+    name: shipping-service
   datasource:
     url: jdbc:h2:mem:shippingdb
     driver-class-name: org.h2.Driver
@@ -10,3 +12,16 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+logging:
+  file:
+    name: ${STEPFLOW_LOG_DIR:../temp/stepflow-logs}/${spring.application.name}.json
+  structured:
+    format:
+      file: ecs
+  logback:
+    rollingpolicy:
+      file-name-pattern: ${logging.file.name}.%d{yyyy-MM-dd}.%i
+      max-file-size: 10MB
+      max-history: 7
+      total-size-cap: 100MB
