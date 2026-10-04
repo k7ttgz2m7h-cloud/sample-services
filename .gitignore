@@ -1,0 +1,20 @@
+**/.env
+
+# OS-specific files
+.DS_Store
+
+# IDE and Project configuration files
+.idea/
+
+# Build and output directories
+target/
+
+customer-domain/customer-service/src/main/resources/db.migration/
+customer-domain/customer-service-client/target/
+customer-domain/customer-service/target/
+customer-domain/customer-service/.env
+
+
+
+temp/stepflow-logs
+**/temp/stepflow-logs/
