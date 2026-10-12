@@ -1,0 +1,18 @@
+package com.stepflow.sample.order.entity;
+
+public final class OrderEnums {
+    private OrderEnums() {
+    }
+
+    public enum OrderStatus {CREATED, PENDING_PAYMENT, CONFIRMED, PROCESSING, COMPLETED, CANCELLED, FAILED}
+
+    public enum AddressType {SHIPPING, BILLING}
+
+    public enum OrderEventType {ORDER_CREATED, ORDER_UPDATED, ORDER_CONFIRMED, ORDER_CANCELLED, ORDER_ITEM_ADDED, ORDER_ITEM_UPDATED, ORDER_ITEM_REMOVED, ORDER_PAYMENT_CONFIRMED, ORDER_FAILED}
+
+    public enum EventStatus {PENDING, PROCESSED, FAILED}
+
+    public enum IdempotencyRequestStatus {PROCESSING, COMPLETED, FAILED}
+
+    public enum AuditAction {ORDER_CREATED, ORDER_UPDATED, ORDER_STATUS_CHANGED, ORDER_ITEM_ADDED, ORDER_ITEM_UPDATED, ORDER_ITEM_REMOVED, ORDER_ADDRESS_UPDATED, ORDER_CANCELLED}
+}
