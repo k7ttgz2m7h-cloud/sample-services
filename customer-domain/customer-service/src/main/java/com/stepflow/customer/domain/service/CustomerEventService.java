@@ -1,38 +1,30 @@
 package com.stepflow.customer.domain.service;
 
-import com.stepflow.customer.domain.entity.CustomerEvent;
 import com.stepflow.customer.domain.entity.CustomerEvent.EventType;
-import com.stepflow.customer.domain.repository.CustomerEventRepository;
+import com.stepflow.infrastructure.outbox.model.EventRecord;
+import com.stepflow.infrastructure.outbox.model.OutboxEventRequest;
+import com.stepflow.infrastructure.outbox.persistence.OutboxEventWriter;
+import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.UUID;
-import java.util.List;
 
+/** Domain payload integration; persistence and publication belong to the shared library. */
 @Service
 public class CustomerEventService {
-    private final CustomerEventRepository customerEventRepository;
+    private final OutboxEventWriter events;
+    private final EntityManager entityManager;
 
-    public CustomerEventService(CustomerEventRepository customerEventRepository) {
-        this.customerEventRepository = customerEventRepository;
+    public CustomerEventService(OutboxEventWriter events, EntityManager entityManager) {
+        this.events = events;
+        this.entityManager = entityManager;
     }
 
-    public CustomerEvent record(UUID domainId, String correlationId, EventType eventType,
-                                Map<String, Object> eventPayload) {
-        return customerEventRepository.save(new CustomerEvent(domainId, correlationId, eventType, eventPayload));
-    }
-
-    public List<CustomerEvent> findPendingEvents() {
-        return customerEventRepository.findTop100ByEventStatusOrderByCreatedAtAsc(CustomerEvent.EventStatus.PENDING);
-    }
-
-    public void markProcessed(CustomerEvent customerEvent) {
-        customerEvent.markProcessed();
-        customerEventRepository.save(customerEvent);
-    }
-
-    public void markFailed(CustomerEvent customerEvent) {
-        customerEvent.markFailed();
-        customerEventRepository.save(customerEvent);
+    public EventRecord record(UUID domainId, String correlationId, EventType eventType,
+                              Map<String, Object> eventPayload) {
+        // JDBC inserts immediately: flush JPA changes so the domain foreign key exists.
+        entityManager.flush();
+        return events.record(new OutboxEventRequest(domainId, eventType.name(), eventPayload, correlationId));
     }
 }

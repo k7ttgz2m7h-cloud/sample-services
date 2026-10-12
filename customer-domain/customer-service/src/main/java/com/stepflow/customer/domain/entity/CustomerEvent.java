@@ -32,7 +32,7 @@ public class CustomerEvent {
     @Column(name = "domain_type", nullable = false, length = 60, updatable = false)
     private String domainType;
 
-    @Column(name = "correlation_id", nullable = false, length = 160, updatable = false)
+    @Column(name = "correlation_id", length = 160, updatable = false)
     private String correlationId;
 
     @Enumerated(EnumType.STRING)
